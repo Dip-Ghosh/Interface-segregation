@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\AreaController;
+use App\Http\Controllers\CarBrandController;
+use App\Http\Controllers\CarTypeController;
+use App\Http\Controllers\CityController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +20,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+//locations
+Route::resource('locations', CityController::class);
+
+//areas
+Route::resource('areas', AreaController::class);
+
+//car type
+Route::resource('car-types', CarTypeController::class);
+
+//car brand
+Route::resource('car-brands', CarBrandController::class);
