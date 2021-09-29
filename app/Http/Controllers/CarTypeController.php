@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CarTypeValidationRequest;
-use App\Models\CarType;
-use App\Service\Settings\CarTypeService;
+use App\Repository\Setting\CarTypeInterface;
+
 
 
 class CarTypeController extends Controller
@@ -12,7 +12,7 @@ class CarTypeController extends Controller
 
     protected $carType;
 
-    public function __construct(CarTypeService  $carType)
+    public function __construct(CarTypeInterface  $carType)
     {
         $this->carType = $carType;
     }
@@ -24,7 +24,7 @@ class CarTypeController extends Controller
      */
     public function index()
     {
-        $data = $this->carType->all();
+        $data = $this->carType->index();
         return view('settings.carTypes.list',compact('data'));
     }
 
@@ -46,7 +46,7 @@ class CarTypeController extends Controller
      */
     public function store(CarTypeValidationRequest $request)
     {
-        $this->carType->store($request->all());
+        $this->carType->hello($request->except('_method','_token'));
         return redirect()->route('car-types.index')->with('success','Car Type created successfully.');
     }
 
@@ -72,7 +72,7 @@ class CarTypeController extends Controller
      */
     public function update(CarTypeValidationRequest $request, $id)
     {
-        $this->carType->update($request->all(),$id);
+        $this->carType->update($request->except('_method','_token'),$id);
         return redirect()->route('car-types.index')->with('success','Car type updated successfully');
     }
 

@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LocationValidationRequest;
-use App\Models\Location;
-use App\Service\Settings\LocationServiceInterface;
+use App\Repository\Setting\LocationInterface;
+
 class CityController extends Controller
 {
 
     protected $location;
 
-    public function __construct(LocationServiceInterface $location)
+    public function __construct(LocationInterface $location)
     {
         $this->location = $location;
     }
@@ -22,7 +22,7 @@ class CityController extends Controller
      */
     public function index()
     {
-        $data = $this->location->all();
+        $data = $this->location->index();
         return view('settings.locations.list',compact('data'));
     }
 
@@ -44,7 +44,7 @@ class CityController extends Controller
      */
     public function store(LocationValidationRequest $request)
     {
-        $this->location->store($request->all());
+        $this->location->store($request->except('_method','_token'));
         return redirect()->route('locations.index')->with('success','Location created successfully.');
     }
 
@@ -70,7 +70,7 @@ class CityController extends Controller
      */
     public function update(LocationValidationRequest $request, $id)
     {
-        $this->location->update($request->all(),$id);
+        $this->location->update($request->except('_method','_token'),$id);
         return redirect()->route('locations.index')->with('success','Location updated successfully');
     }
 

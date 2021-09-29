@@ -1,16 +1,20 @@
 <?php
 
 namespace App\Repository\Setting;
+
 use App\Models\CarType;
+use App\Repository\Base\BaseInterface;
+use App\Repository\Base\BaseRepository;
 
 
-class CarTypeRepository implements CarTypeInterface
+class CarTypeRepository extends BaseRepository implements CarTypeInterface, BaseInterface
 {
 
     protected $carType;
 
     public function __construct(CarType $carType)
     {
+        parent::__construct($carType);
         $this->carType = $carType;
     }
     public function fetchActiveCarType($status,$orderBy){
@@ -20,30 +24,5 @@ class CarTypeRepository implements CarTypeInterface
           ->get();
     }
 
-    public function store(array $data){
-        $value = [
-           'name'=>$data['name'],
-           'status'=>$data['status']
-        ];
-        $this->carType->create($value);
-    }
-
-    public function delete($id,$status){
-        $this->carType->where('id', $id)->update([
-            'status'=>$status
-        ]);
-    }
-
-    public function edit($id){
-        return $this->carType->where('id', $id)->first();
-    }
-
-    public function update(array $data, $id){
-        $value = [
-            'name'=>$data['name'],
-            'status'=>$data['status']
-        ];
-        $this->carType->where('id', $id)->update($value);
-    }
 
 }

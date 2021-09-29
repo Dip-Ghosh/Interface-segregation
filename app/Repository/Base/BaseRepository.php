@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Repository\Base;
-
+use App\Models;
+use App\Repository\Base\BaseInterface;
 use Illuminate\Database\Eloquent\Model;
 
 class BaseRepository implements BaseInterface
@@ -12,16 +13,17 @@ class BaseRepository implements BaseInterface
     public function __construct(Model $model)
     {
         $this->model = $model;
+
     }
 
     public function index()
     {
 
-       return $this->model->all();
+       return $this->model->where('status','Active')->get();
 
     }
 
-    public function store(array $data)
+    public function hello(array $data)
     {
 
         return $this->model->store($data);
@@ -37,10 +39,10 @@ class BaseRepository implements BaseInterface
         return $this->model->where('id',$id)->update($data);
     }
 
-    public function delete($id, $status)
+    public function delete($id)
     {
         return  $this->model->where('id',$id)->update([
-            'status'=>$status
+            'status'=>'Inactive'
         ]);
     }
 }

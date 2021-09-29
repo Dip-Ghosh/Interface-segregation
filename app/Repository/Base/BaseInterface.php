@@ -7,11 +7,11 @@ interface BaseInterface
 
     public function index();
     
-    public function store(array $data);
+    public function hello(array $data);
 
     public function edit($id);
 
     public function update(array $data, $id);
 
-    public function delete($id,$status);
+    public function delete($id);
 }

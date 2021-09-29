@@ -28,14 +28,14 @@ class RepositoryServiceProvider extends ServiceProvider
             'App\Repository\Setting\CarTypeInterface',
             'App\Repository\Setting\CarTypeRepository'
         );
-        $this->app->bind(
-            'App\Repository\Setting\CarBrandInterface',
-            'App\Repository\Setting\CarBrandRepository'
-        );
-        $this->app->bind(
-            'App\Repository\Setting\CarModelInterface',
-            'App\Repository\Setting\CarModelRepository'
-        );
+//        $this->app->bind(
+//            'App\Repository\Setting\CarBrandInterface',
+//            'App\Repository\Setting\CarBrandRepository'
+//        );
+//        $this->app->bind(
+//            'App\Repository\Setting\CarModelInterface',
+//            'App\Repository\Setting\CarModelRepository'
+//        );
         $this->app->bind(
             'App\Repository\Setting\AreaInterface',
             'App\Repository\Setting\AreaRepository'

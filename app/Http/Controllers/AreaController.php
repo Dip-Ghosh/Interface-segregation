@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Repository\Setting\AreaInterface;
-use App\Service\Settings\AreaServiceInterface;
-use App\Service\Settings\LocationServiceInterface;
+use App\Repository\Setting\LocationInterface;
 use App\Http\Requests\AreaRequest;
 
 class AreaController extends Controller
@@ -12,7 +11,7 @@ class AreaController extends Controller
     private $area;
     private $city;
 
-    public function __construct(AreaInterface $area,LocationServiceInterface $city)
+    public function __construct(AreaInterface $area,LocationInterface $city)
     {
         $this->area = $area;
         $this->city = $city;
@@ -36,7 +35,7 @@ class AreaController extends Controller
      */
     public function create()
     {
-        $locations =  $this->city->all();
+        $locations =  $this->city->index();
         return view('settings.areas.create',compact('locations'));
     }
 
@@ -48,7 +47,7 @@ class AreaController extends Controller
      */
     public function store(AreaRequest $request)
     {
-        $this->area->store($request->except('_token'));
+        $this->area->store($request->except('_method','_token'));
         return redirect()->route('areas.index')->with('success','Area created successfully.');
     }
 
@@ -62,7 +61,7 @@ class AreaController extends Controller
     public function edit($id)
     {
         $data = $this->area->edit($id);
-        $locations = $this->city->all();
+        $locations = $this->city->index();
         return view('settings.areas.edit',compact('data','locations'));
     }
 
@@ -75,7 +74,7 @@ class AreaController extends Controller
      */
     public function update(AreaRequest $request, $id)
     {
-        $this->area->update($request->except('_token'),$id);
+        $this->area->update($request->except('_method','_token'),$id);
         return redirect()->route('areas.index')->with('success','Area  updated successfully');
     }
 

@@ -2,11 +2,11 @@
 
 namespace App\Repository\Setting;
 
-
-
 use App\Models\Location;
+use App\Repository\Base\BaseInterface;
+use App\Repository\Base\BaseRepository;
 
-class LocationRepository implements LocationInterface
+class LocationRepository extends BaseRepository implements LocationInterface, BaseInterface
 {
     protected $model;
 
