@@ -12,6 +12,7 @@ class BaseRepository implements BaseInterface
     
     public function __construct(Model $model)
     {
+
         $this->model = $model;
 
     }
@@ -23,10 +24,10 @@ class BaseRepository implements BaseInterface
 
     }
 
-    public function hello(array $data)
+    public function store(array $data)
     {
 
-        return $this->model->store($data);
+        return $this->model->insert($data);
     }
 
     public function edit($id)

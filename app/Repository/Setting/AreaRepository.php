@@ -1,9 +1,6 @@
 <?php
 
 namespace App\Repository\Setting;
-
-
-
 use App\Models\Area;
 use App\Repository\Base\BaseInterface;
 use App\Repository\Base\BaseRepository;

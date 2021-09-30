@@ -7,7 +7,7 @@ interface BaseInterface
 
     public function index();
     
-    public function hello(array $data);
+    public function store(array $data);
 
     public function edit($id);
 

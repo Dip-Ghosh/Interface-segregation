@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CarBrand;
 use App\Repository\Setting\CarTypeInterface;
 use Illuminate\Http\Request;
-use App\Service\Settings\CarBrandService;
-use App\Service\Settings\CarTypeService;
+use App\Repository\Setting\CarBrandInterface;
 use App\Http\Requests\CarBrandValidationRequest;
 
 
@@ -15,7 +14,7 @@ class CarBrandController extends Controller
     private $carBrand;
     private $carType;
 
-    public function __construct(CarBrandService $carBrand,CarTypeService $carType)
+    public function __construct(CarBrandInterface $carBrand,CarTypeInterface $carType)
     {
         $this->carBrand = $carBrand;
         $this->carType = $carType;
@@ -28,7 +27,7 @@ class CarBrandController extends Controller
      */
     public function index()
     {
-        $data = $this->carBrand->all();
+        $data = $this->carBrand->index();
         return view('settings.carBrands.list',compact('data'));
     }
 
@@ -39,7 +38,7 @@ class CarBrandController extends Controller
      */
     public function create()
     {
-        $types = $this->carType->all();
+        $types = $this->carType->index();
         return view('settings.carBrands.create',compact('types'));
     }
 
@@ -65,7 +64,7 @@ class CarBrandController extends Controller
     public function edit($id)
     {
         $data = $this->carBrand->edit($id);
-        $types = $this->carType->all();
+        $types = $this->carType->index();
         return view('settings.carBrands.edit',compact('data','types'));
     }
 

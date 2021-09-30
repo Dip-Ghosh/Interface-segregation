@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\CarModel;
-use App\Service\Settings\CarModelService;
+use App\Repository\Setting\CarModelInterface;
 use App\Http\Requests\CarModelValidationRequest;
 
 class CarModelController extends Controller
 {
     protected $carModel;
 
-    public function __construct(CarModelService $carModel)
+    public function __construct(CarModelInterface $carModel)
     {
         $this->carModel = $carModel;
     }
